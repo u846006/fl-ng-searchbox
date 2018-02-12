@@ -1,0 +1,58 @@
+{
+  "name": "ng-searchbox",
+  "version": "0.0.1",
+  "description": "Advanced Searchbox",
+  "scripts": {
+    "start": "ng serve",
+    "build": "ng build --prod",
+    "deploy": "ng build --prod --base-href / && angular-cli-ghpages",
+    "lint": "ng lint",
+    "ci": "npm run lint && npm run test && npm run e2e",
+    "sme": "ng build && source-map-explorer dist/main.bundle.js",
+    "release": "standard-version && git push --follow-tags origin master",
+    "docker": "docker build -t angularexampleapp . && docker run -d -p 4200:80 angularexampleapp",
+    "postinstall": "node tools/pug-loader.js"
+  },
+  "author": "Tyler Beck",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 6.9.0",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "@angular/animations": "^5.2.3",
+    "@angular/common": "^5.2.3",
+    "@angular/compiler": "^5.2.3",
+    "@angular/core": "^5.2.3",
+    "@angular/forms": "^5.2.3",
+    "@angular/http": "^5.2.3",
+    "@angular/platform-browser": "^5.2.3",
+    "@angular/platform-browser-dynamic": "^5.2.3",
+    "@angular/router": "^5.2.3",
+    "@fortawesome/fontawesome": "^1.1.3",
+    "@fortawesome/fontawesome-free-brands": "^5.0.6",
+    "@fortawesome/fontawesome-free-regular": "^5.0.6",
+    "@fortawesome/fontawesome-free-solid": "^5.0.6",
+    "classlist.js": "1.1.20150312",
+    "core-js": "2.5.3",
+    "lodash": "^4.17.5",
+    "rxjs": "5.5.6",
+    "zone.js": "0.8.20"
+  },
+  "devDependencies": {
+    "@angular/cdk": "^5.1.1",
+    "@angular/cli": "^1.6.8",
+    "@angular/compiler-cli": "^5.2.3",
+    "@angular/platform-server": "^5.2.3",
+    "@types/jasmine": "2.8.6",
+    "@types/jasminewd2": "2.0.3",
+    "@types/node": "9.4.0",
+    "find-node-modules": "^1.0.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "pug-loader": "^2.3.0",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1",
+    "apply-loader": "^2.0.0"
+  }
+}

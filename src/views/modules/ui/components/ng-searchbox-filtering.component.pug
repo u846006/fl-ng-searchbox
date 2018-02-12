@@ -1,0 +1,42 @@
+div.ng-filtering.ng-clearfix
+  span(
+    class="filtering-selection",
+    [ngClass]="{ 'active': active }",
+    (click)="toggleFilters();"
+  )
+    i.fa.fa-filter
+  ul(
+    [hidden]="!active",
+    #ngSearchboxFilteringList=""
+  )
+    li(
+      *ngFor="let filter of availableFilters",
+      [ngClass]="{ 'child-filter': filter.child, 'root-filter': filter.root }",
+      (click)="addFilter($event, filter.name);"
+    )
+      i.fa.fa-filter
+      span(
+        [innerText]="filter.displayName",
+        class="ng-filter-display-name"
+      )
+      ng-template(
+        *ngIf="filter.root"
+      )
+        span(
+          class="ng-filtered-from"
+        )
+          i(class="fa fa-level-up")
+          | (Derived from Root
+          i(class="fa fa-angle-double-right")
+          span([innerText]="' ' + filter.root")
+          | )
+      ng-template(
+      *ngIf="filter.child"
+      )
+        span(
+          class="ng-filtered-from"
+        )
+          i(class="fa fa-level-down")
+          | (Derived from
+          span([innerText]="' ' + filter.child")
+          | )

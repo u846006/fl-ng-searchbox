@@ -1,0 +1,34 @@
+div.ng-searchbox
+  ng-searchbox-filtering(
+    [observer]="onChange"
+  )
+  div.ng-searchbox-wrapper
+    input(
+      [id]="sid",
+      type="text",
+      [(ngModel)]="query",
+      (ngModelChange)="queryChange($event);",
+      (keydown)="onKeyDown($event);",
+      [placeholder]="placeholder"
+    )
+    div.ng-searchbox-buttons
+      span.ng-searchbox-button(
+        *ngIf="hasQuery",
+        (click)="handleEraser();"
+      )
+        i.fa.fa-eraser
+      span.ng-searchbox-button(
+        *ngIf="(hasQuery || (Filtering && Filtering.hasFilters))",
+        (click)="handleGarbage();"
+      )
+        i.fa.fa-trash
+      span.ng-searchbox-button
+        i.fa.fa-search(
+          (click)="handleSearch();"
+        )
+  ng-searchbox-added-filters-wrapper(
+    [ngClass]="{ 'active': (Filtering && Filtering.hasFilters) }",
+    #ngSearchboxAddedFiltersWrapper="",
+    [observer]="onChange",
+    class="ng-clearfix"
+  )

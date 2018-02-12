@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "ng-searchbox"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [],
+      "index": "index.html",
+      "main": "scripts/main.ts",
+      "polyfills": "scripts/polyfills.ts",
+      "tsconfig": "tsconfig.app.json",
+      "styles": [
+        "styles/app.sass"
+      ],
+      "scripts": [],
+      "environmentSource": "scripts/environments/environment.ts",
+      "environments": {
+        "dev": "scripts/environments/environment.ts",
+        "prod": "scripts/environments/environment.prod.ts"
+      }
+    }
+  ],
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    }
+  ],
+  "defaults": {
+    "styleExt": "sass",
+    "component": {}
+  }
+}

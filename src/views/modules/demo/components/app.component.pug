@@ -1,0 +1,11 @@
+div.app
+  h1 NgSearchbox
+  div.container
+    ng-searchbox(
+      [ngSearchBoxEnableFilterOperators]="true",
+      [ngSearchBoxFiltering]="filters",
+      [ngSearchBoxConfig]="config",
+      [ngSearchBoxCacheFilter]="true",
+      (onRegisterApi)="register($event);",
+      [placeholder]="'Search...'"
+    )

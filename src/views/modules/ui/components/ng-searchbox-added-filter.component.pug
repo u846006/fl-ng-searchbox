@@ -1,0 +1,47 @@
+div.ng-searchbox-added-filter(
+  #ngSearchboxAddedFilter=""
+)
+  div(
+    *ngIf="searchbox && searchbox.ngSearchBoxEnableFilterOperators"
+  )
+    ng-searchbox-filter-operators(
+      [filter]="filter"
+    )
+  div.ng-searchbox-added-filter-contents(
+    (click)="openFilter();"
+  )
+    span(
+      class="filter-name",
+      [innerText]="filter.displayName + ':'"
+    )
+    div(
+      *ngIf="filter && filter.selector"
+    )
+      span(
+        class="selector-type",
+        [innerText]="filter.selector.name"
+      )
+    div(
+      *ngIf="filter && filter.value && !filter.editing"
+    )
+      span(
+        [innerText]="filter.value"
+        class="filter-value"
+      )
+    div(
+      *ngIf="filter && filter.editing"
+    )
+      input(
+        type="text",
+        [(ngModel)]="v",
+        (ngModelChange)="valueChange($event);",
+        (keydown)="onKeyDown($event);",
+        (keyup)="onKeyUp($event);"
+      )
+    span(
+      (click)="destroy();"
+    )
+      i.fa.fa-times
+    ng-searchbox-filter-selectors(
+      [filter]="filter"
+    )
