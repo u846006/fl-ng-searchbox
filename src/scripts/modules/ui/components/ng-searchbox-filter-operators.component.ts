@@ -53,7 +53,7 @@ export class NgSearchboxFilterOperators implements AfterViewInit {
 
     this.Filtering = this.ngAddedFilter.Filtering;
 
-    if (this.Filtering.getFilterCount()) {
+    if (this.Filtering.getFilterCount() > 1) {
 
       this.hasOperator = true;
 

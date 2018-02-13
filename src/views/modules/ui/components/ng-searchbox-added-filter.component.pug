@@ -1,7 +1,7 @@
 div.ng-searchbox-added-filter(
   #ngSearchboxAddedFilter=""
 )
-  div(
+  div.filter-section.operators(
     *ngIf="searchbox && searchbox.ngSearchBoxEnableFilterOperators"
   )
     ng-searchbox-filter-operators(
@@ -14,21 +14,22 @@ div.ng-searchbox-added-filter(
       class="filter-name",
       [innerText]="filter.displayName + ':'"
     )
-    div(
-      *ngIf="filter && filter.selector"
+    div.filter-section.selectors(
+      *ngIf="filter && filter.selector",
+      (click)="toggleFilterSelectors();"
     )
       span(
         class="selector-type",
         [innerText]="filter.selector.name"
       )
-    div(
+    div.filter-section(
       *ngIf="filter && filter.value && !filter.editing"
     )
       span(
         [innerText]="filter.value"
         class="filter-value"
       )
-    div(
+    div.filter-section(
       *ngIf="filter && filter.editing"
     )
       input(
@@ -40,8 +41,9 @@ div.ng-searchbox-added-filter(
       )
     span(
       (click)="destroy();"
-    )
+    ).filter-destroy
       i.fa.fa-times
     ng-searchbox-filter-selectors(
+      #ngFilterSelectors="",
       [filter]="filter"
     )

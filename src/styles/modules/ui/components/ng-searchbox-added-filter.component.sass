@@ -7,11 +7,28 @@
     transition: opacity .50s ease-in-out
     -moz-transition: opacity .50s ease-in-out
     -webkit-transition: opacity .50s ease-in-out
+    
+    .filter-section
+
+      &.selectors
+
+        -webkit-user-select: none
+        -moz-user-select: none
+        -ms-user-select: none
+        user-select: none
+
+      &.operators
+
+        float: left
+
+      display: inline-block
+      vertical-align: top
   
     > div.ng-searchbox-added-filter-contents
 
       background: #FFF
       padding: 5px 6px 5px 6px
+      position: relative
       border-radius: 6px
       margin-right: 10px
       margin-top: 8px
@@ -29,6 +46,11 @@
 
       span
 
+        &.filter-destroy
+
+          margin-left: 8px
+          margin-right: 4px
+
         &.filter-name
 
           font-size: 13px
@@ -43,7 +65,7 @@
           text-transform: uppercase
           letter-spacing: 1px
           font-weight: bold
-          margin-top: 0px
+          margin-top: 0
           background: #CAE5FF
           margin-left: 9px
           padding: 4px

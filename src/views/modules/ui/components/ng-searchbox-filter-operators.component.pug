@@ -6,9 +6,9 @@ div(
     (click)="toggleOperators();"
   )
     i(class="fa fa-arrow-left")
-    ng-template(
+    div(
       *ngIf="filter && filter.operator"
-    )
+    ).operator-name
       i([innerText]="filter.operator.name")
     i(class="fa fa-arrow-right")
   div(

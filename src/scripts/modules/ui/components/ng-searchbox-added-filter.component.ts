@@ -12,6 +12,7 @@ import { UtilsService } from '../services/utils.service';
 import { EventHandling } from '../services/event-handling.service';
 
 import { NgSearchboxComponent } from './ng-searchbox.component';
+import { NgSearchboxFilterSelectors } from './ng-searchbox-filter-selectors.component';
 
 import { ModifiedSearch } from '../../../interfaces/search';
 
@@ -28,6 +29,8 @@ import { ModifiedSearch } from '../../../interfaces/search';
 export class NgSearchboxAddedFilter {
 
   @ViewChild('ngSearchboxAddedFilter') public ngSearchboxAddedFilter: ElementRef;
+  
+  @ViewChild('ngFilterSelectors') public ngFilterSelectors: NgSearchboxFilterSelectors;
 
   public Filtering: FilteringService = null;
 
@@ -195,9 +198,21 @@ export class NgSearchboxAddedFilter {
 
       this.filter.editing = false;
 
+      this
+        .ngFilterSelectors
+        .setVisibility(false);
+
     }
 
     return this;
+
+  }
+
+  public toggleFilterSelectors (): void {
+
+    this
+      .ngFilterSelectors
+      .setVisibility();
 
   }
 
@@ -261,9 +276,12 @@ export class NgSearchboxAddedFilter {
 
   }
 
-  public destroy (): void {
+  /**
+   * @method destroy
+   * Unload this filter from our searchbox memory
+   */
 
-    console.log('[destroy...');
+  public destroy (): void {
 
     this
       .Filtering

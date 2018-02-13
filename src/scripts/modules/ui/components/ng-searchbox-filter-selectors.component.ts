@@ -32,6 +32,8 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
 
   public selectors: Search.Selector[] = _.clone(SELECTORS);
 
+  public shownStatus: boolean = true;
+
   constructor (
     @Inject(forwardRef(() => NgSearchboxAddedFilter)) private ngAddedFilter: NgSearchboxAddedFilter
   ) {
@@ -50,17 +52,13 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
 
         selector.selected = false;
 
-    });
+      });
 
-    self
-      .filter
-      .selector = selector;
+    self.filter.selector = selector;
 
     selector.selected = true;
 
-    if(self
-      .filter
-      .value) {
+    if(self.filter.value) {
 
         this
           .ngAddedFilter
@@ -70,10 +68,7 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
         this
           .ngAddedFilter
           .Event
-          .onFilterSelectorChanged(
-            selector,
-            self.filter
-          );
+          .onFilterSelectorChanged(selector, self.filter);
 
     }
 
@@ -83,15 +78,13 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
 
   }
 
-  public getDefaultSelector(): NgSearchboxFilterSelectors {
+  public getDefaultSelector (): NgSearchboxFilterSelectors {
 
     let self: NgSearchboxFilterSelectors = this;
 
     setTimeout((): void => {
 
-      if (!self
-          .filter
-          .selector) {
+      if (!self.filter.selector) {
 
         self
           .selectors
@@ -99,26 +92,22 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
 
             if (selector.selected) {
 
-              self
-                .filter
-                .selector = selector;
+              self.filter.selector = selector;
 
             }
 
           });
 
-        if (!self.filter.selector
+        if (
+          !self.filter.selector
+          && self.selectors.length
+        ) {
 
-          && self.selectors.length) {
-
-          let selector: Search.Selector = self
-            .selectors[0];
+          let selector: Search.Selector = self.selectors[0];
 
           selector.selected = true;
 
-          self
-            .filter
-            .selector = selector;
+          self.filter.selector = selector;
 
         }
 
@@ -128,25 +117,37 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
           .selectors
           .forEach((selector: Search.Selector): void => {
 
-            selector.selected = (selector.key === self
-              .filter
-              .selector
-              .key);
+            selector.selected = (selector.key === self.filter.selector.key);
 
           });
 
       }
 
-    }, 0);
+    });
 
     return this;
 
   }
 
-  ngAfterViewInit () {
+  public ngAfterViewInit (): void {
 
-    this
-      .getDefaultSelector();
+    this.getDefaultSelector();
+
+  }
+
+  public setVisibility (visibility: boolean = null): NgSearchboxFilterSelectors {
+
+    if (visibility === null) {
+
+      this.shownStatus = !this.shownStatus;
+
+    } else {
+
+      this.shownStatus = visibility;
+
+    }
+
+    return this;
 
   }
 
