@@ -1,15 +1,8 @@
 <img src="img/angular.png" alt="Angular" align="right" />
-![GitHub version](https://img.shields.io/github/tag/tybeck/ng-searchbox.svg?maxAge=180000)
-&nbsp;&nbsp;&nbsp;
-![NPM Dependencies](https://david-dm.org/tybeck/ng-searchbox.svg)
-&nbsp;&nbsp;&nbsp;
-![NPM Dev Dependencies](https://david-dm.org/tybeck/ng-searchbox/dev-status.svg)
-&nbsp;&nbsp;&nbsp;
-![Total Downloads](https://img.shields.io/github/downloads/tybeck/ng-searchbox/total.svg?maxAge=180000)
-&nbsp;&nbsp;&nbsp;
 
-
-[![Dependencies](https://img.shields.io/david/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)
+[![Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-orange.svg)](https://github.com/tybeck/ng-searchbox#)&nbsp;&nbsp;&nbsp;
+[![Dependencies](https://img.shields.io/david/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)&nbsp;&nbsp;&nbsp;
+[![DevDependencies](https://img.shields.io/david/dev/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)
 
 ## NgSearchbox - Alpha
 
