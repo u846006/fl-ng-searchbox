@@ -8,6 +8,9 @@
 ![Total Downloads](https://img.shields.io/github/downloads/tybeck/ng-searchbox/total.svg?maxAge=180000)
 &nbsp;&nbsp;&nbsp;
 
+
+[![Dependencies](https://img.shields.io/david/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)
+
 ## NgSearchbox - Alpha
 
 ### Currently in development!
