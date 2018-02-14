@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/tybeck/ng-searchbox/compare/v0.2.0...v0.3.0) (2018-02-14)
+
+
+### Features
+
+* added rollup ([96ba2a0](https://github.com/tybeck/ng-searchbox/commit/96ba2a0))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/tybeck/ng-searchbox/compare/v0.1.5...v0.2.0) (2018-02-14)
 
