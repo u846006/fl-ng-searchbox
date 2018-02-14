@@ -1,6 +1,6 @@
 {
   "name": "ng-searchbox",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Advanced Searchbox",
   "scripts": {
     "start": "ng serve",
@@ -20,6 +20,10 @@
     "npm": ">= 3.0.0"
   },
   "dependencies": {
+    "@angular/cdk": "^5.1.1",
+    "@angular/platform-server": "^5.2.3",
+    "@angular/compiler-cli": "^5.2.3",
+    "@angular/cli": "^1.6.8",
     "@angular/animations": "^5.2.3",
     "@angular/common": "^5.2.3",
     "@angular/compiler": "^5.2.3",
@@ -35,16 +39,13 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.6",
     "find-node-modules": "^1.0.4",
     "classlist.js": "1.1.20150312",
+    "apply-loader": "^2.0.0",
     "core-js": "2.5.3",
     "lodash": "^4.17.5",
     "rxjs": "5.5.6",
     "zone.js": "0.8.20"
   },
   "devDependencies": {
-    "@angular/cdk": "^5.1.1",
-    "@angular/cli": "^1.6.8",
-    "@angular/compiler-cli": "^5.2.3",
-    "@angular/platform-server": "^5.2.3",
     "@types/jasmine": "2.8.6",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "9.4.0",
@@ -52,8 +53,7 @@
     "pug-loader": "^2.3.0",
     "ts-node": "^3.2.0",
     "tslint": "^5.9.1",
-    "typescript": "^2.7.1",
-    "apply-loader": "^2.0.0"
+    "typescript": "^2.7.1"
   },
   "repository": "https://github.com/tybeck/ng-searchbox"
 }
