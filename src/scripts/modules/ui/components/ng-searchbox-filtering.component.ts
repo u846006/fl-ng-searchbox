@@ -100,13 +100,9 @@ export class NgSearchboxFilteringComponent implements AfterViewInit {
 
       list: HTMLElement = (<HTMLElement>this.ngSearchboxFilteringList.nativeElement),
 
-      h: number = this.utils.getHeightOf(el),
-
-      w: number = this.utils.getWidthOf(el);
+      h: number = this.utils.getHeightOf(el);
 
     list.style.top = h + 'px';
-
-    list.style.width = w + 'px';
 
   }
 

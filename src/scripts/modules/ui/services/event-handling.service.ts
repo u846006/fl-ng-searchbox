@@ -4,15 +4,19 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { ModifiedSearch, Search } from '../../../interfaces/search';
 
-import { API } from './api.service';
+import {NgSearchboxComponent} from '../components/ng-searchbox.component';
+
+import { SearchboxEvent } from '../../../constants/events.constant';
 
 @Injectable()
 export class EventHandling {
 
   public emitter: EventEmitter<any>;
 
+  public timer: any = null;
+
   constructor (
-    private api: API
+    private ngSearchBoxComponent: NgSearchboxComponent
   ) {
 
     return this;
@@ -38,7 +42,8 @@ export class EventHandling {
     type = type.toLowerCase();
 
     this
-      .api
+      .ngSearchBoxComponent
+      .Api
       .$$registeredEvents
       .forEach((event: any): void => {
 
@@ -46,9 +51,10 @@ export class EventHandling {
 
           event.type = event.type.toLowerCase();
 
-          if (event.type === type &&
-
-            typeof event.fn === 'function') {
+          if (
+            event.type === type &&
+            typeof event.fn === 'function'
+          ) {
 
               event.fn(ev, data);
 
@@ -62,9 +68,51 @@ export class EventHandling {
 
   }
 
-  public onChange (parameters: any): EventHandling {
+  public onChange (parameters: any, invocation: Function = null): EventHandling {
 
-    this.fire('onChange', parameters);
+    if (
+      !invocation ||
+      typeof invocation !== 'function'
+    ) {
+
+      invocation = function () {};
+
+    }
+
+    if (this.timer) {
+
+      this
+        .ngSearchBoxComponent
+        .window
+        .clearTimeout(this.timer);
+
+      this.timer = null;
+
+    }
+
+    if (
+      this.ngSearchBoxComponent.ngSearchBoxConfig &&
+      this.ngSearchBoxComponent.ngSearchBoxConfig.delay
+    ) {
+
+      this.timer = this
+        .ngSearchBoxComponent
+        .window
+        .setTimeout((): void => {
+
+          invocation();
+
+          this.fire(SearchboxEvent.ON_CHANGE, parameters);
+
+        }, this.ngSearchBoxComponent.ngSearchBoxConfig.delay);
+
+    } else {
+
+      invocation();
+
+      this.fire(SearchboxEvent.ON_CHANGE, parameters);
+
+    }
 
     return this;
 
@@ -72,15 +120,17 @@ export class EventHandling {
 
   public onQueryAdded (n: string, o: string): EventHandling {
 
-    if (o === null || typeof o === 'undefined' ||
+    if (
+      o === null ||
+      typeof o === 'undefined' ||
+      (typeof o !== 'undefined' && !o.length)
+    ) {
 
-      (typeof o !== 'undefined' && !o.length)) {
+      if (n && n.length) {
 
-        if (n && n.length) {
+        this.fire('onQueryAdded', n);
 
-          this.fire('onQueryAdded', n);
-
-        }
+      }
 
     }
 
@@ -90,9 +140,15 @@ export class EventHandling {
 
   public onQueryRemoved (n: string, o: string): EventHandling {
 
-    if (o === null || typeof o !== 'undefined' && o && o.length) {
+    if (
+      o === null ||
+      typeof o !== 'undefined' && o && o.length
+    ) {
 
-      if (!n || (typeof n === 'string' && !n.length)) {
+      if (
+        !n ||
+        (typeof n === 'string' && !n.length)
+      ) {
 
         this.fire('onQueryRemoved', n);
 
@@ -106,8 +162,7 @@ export class EventHandling {
 
   public onEraser (): EventHandling {
 
-    this
-      .fire('onEraser');
+    this.fire('onEraser');
 
     return this;
 
@@ -115,8 +170,7 @@ export class EventHandling {
 
   public onGarbage (): EventHandling {
 
-    this
-      .fire('onGarbage');
+    this.fire('onGarbage');
 
     return this;
 
@@ -124,8 +178,7 @@ export class EventHandling {
 
   public onFilterChanged (filter: ModifiedSearch.ModifiedFilter): EventHandling {
 
-    this
-      .fire('onFilterChanged', filter);
+    this.fire('onFilterChanged', filter);
 
     return this;
 

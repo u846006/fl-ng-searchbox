@@ -1,5 +1,10 @@
 'use strict';
 
+import * as _ from 'lodash';
+
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -10,11 +15,15 @@ import {
   ViewChild,
   ChangeDetectorRef,
   ElementRef,
-  Inject
+  Inject,
+  ViewContainerRef,
+  Compiler,
+  Injector,
+  NgModuleRef,
+  NgModule,
 } from '@angular/core';
 
 import { UtilsService } from '../services/utils.service';
-import { MemoryService } from '../services/memory.service';
 import { EventHandling } from '../services/event-handling.service';
 import { FilteringService } from '../services/filtering.service';
 import { PlaceholdersService } from '../services/placeholders.service';
@@ -36,6 +45,8 @@ import { NgSearchboxAddedFiltersWrapper } from './ng-searchbox-added-filters-wra
 
 export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('ngSearchboxDclBottom', { read: ViewContainerRef }) public ngSearchboxDclBottom: ViewContainerRef;
+
   @ViewChild('ngSearchboxAddedFiltersWrapper') public ngSearchboxAddedFiltersWrapper: NgSearchboxAddedFiltersWrapper;
 
   @Input('searchParams') searchParams: Search.Parameters = null;
@@ -54,6 +65,8 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
   @Input('ngSearchBoxFilterOperators') public ngSearchBoxFilterOperators: any = null;
 
+  @Input('ngSearchBoxDclAfter') public ngSearchBoxDclAfter: any[] = [];
+
   @Input('placeholder') public placeholder: string = '';
 
   @Output('onRegisterApi') onRegisterApi: EventEmitter<API> = new EventEmitter<API>();
@@ -68,30 +81,36 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
   public Api: API = null;
 
-  public query: string = <string>'';
+  public query: string = '';
 
-  public previousQuery: string = <string>null;
+  public previousQuery: string = null;
 
-  public hasQuery: boolean = <boolean>false;
+  public hasQuery: boolean = false;
 
-  public sid: string = <string>'';
+  public customParameters: any = {};
 
-  public timer: any = null;
+  public customParametersChanged: string[] = [];
+
+  public sid: string = '';
 
   public defaultParams: Search.Parameters = {
 
     'query': '',
 
-    'filters': []
+    'filters': [],
+
+    'operators': []
 
   };
 
   constructor (
     public element: ElementRef,
-    private memory: MemoryService,
     private changeDetectorRef: ChangeDetectorRef,
+    private compiler: Compiler,
+    private injector: Injector,
+    private module: NgModuleRef<any>,
     public utils: UtilsService,
-    @Inject(Window) private window: Window
+    @Inject(Window) public window: Window
   ) {
 
     return this;
@@ -120,7 +139,7 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
     this.Api = new API();
 
-    this.Event = new EventHandling(self.Api);
+    this.Event = new EventHandling(self);
 
     this.Filtering = new FilteringService(self);
 
@@ -131,42 +150,13 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
       .getPublisher()
       .subscribe((filters: ModifiedSearch.ModifiedFilter[]): void => {
 
-        if (self.timer) {
-
-          self
-            .window
-            .clearTimeout(self.timer);
-
-          self.timer = null;
-
-        }
-
         self
           .searchParams
           .filters = filters;
 
-        if (
-          self.ngSearchBoxConfig &&
-          self.ngSearchBoxConfig.delay
-        ) {
-
-          self.timer = self
-            .window
-            .setTimeout((): void => {
-
-              self
-                .Event
-                .onChange(self.searchParams);
-
-            }, self.ngSearchBoxConfig.delay);
-
-        } else {
-
-          self
-            .Event
-            .onChange(self.searchParams);
-
-        }
+        self
+          .Event
+          .onChange(self.searchParams);
 
       });
 
@@ -178,11 +168,63 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
     self.emit(Search.InformationChange, searchBoxInformationExchange);
 
-    self.register();
+    self
+      .constructDclAfterComponents()
+      .register();
 
     self
       .changeDetectorRef
       .detectChanges();
+
+  }
+
+  private constructDclAfterComponents (): NgSearchboxComponent {
+
+    let names: any[] = this.ngSearchBoxDclAfter;
+
+    if (!_.isArray(names)) {
+
+      names = [<any>this.ngSearchBoxDclAfter];
+
+    }
+
+    _.forEach(names, (component: any): void => {
+
+      if (component) {
+
+        let module = NgModule({
+
+          'imports': [
+            FormsModule,
+            CommonModule
+          ],
+
+          'declarations': [
+            component
+          ]
+
+        })(class {});
+
+        this
+          .compiler
+          .compileModuleAndAllComponentsAsync(module)
+          .then((factories) => {
+
+            let f = factories.componentFactories[0],
+
+              cmpRef = f.create(this.injector, [], null, this.module);
+
+            this
+              .ngSearchboxDclBottom
+              .insert(cmpRef.hostView);
+
+          });
+
+      }
+
+    });
+
+    return this;
 
   }
 
@@ -221,46 +263,13 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
       self.hasQuery = !!(val && val.length);
 
+      self.searchParams.query = val;
+
       self
-        .searchParams
-        .query = val;
-
-      if (self.timer) {
-
-        self
-          .window
-          .clearTimeout(this.timer);
-
-        self.timer = null;
-
-      }
-
-      if (
-        self.ngSearchBoxConfig &&
-        self.ngSearchBoxConfig.delay
-      ) {
-
-        self.timer = self
-          .window
-          .setTimeout((): void => {
-
-            self
-              .Event
-              .onChange(self.searchParams)
-              .onQueryAdded(val, this.previousQuery)
-              .onQueryRemoved(val, this.previousQuery)
-
-          }, self.ngSearchBoxConfig.delay);
-
-      } else {
-
-        self
-          .Event
-          .onChange(self.searchParams)
-          .onQueryAdded(val, this.previousQuery)
-          .onQueryRemoved(val, this.previousQuery)
-
-      }
+        .Event
+        .onChange(self.searchParams)
+        .onQueryAdded(val, this.previousQuery)
+        .onQueryRemoved(val, this.previousQuery);
 
     }
 
@@ -323,24 +332,107 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
   }
 
-  public handleGarbage(): void {
+  public handleGarbage (): void {
 
     if (
       this.searchParams.query ||
-      this.Filtering.hasFilters
+      this.Filtering.hasFilters ||
+      (this.customParametersChanged && this.customParametersChanged.length)
     ) {
 
-      this.eraseQuery();
+      if (this.searchParams.query) {
 
-      this
-        .Filtering
-        .removeAll();
+        this.eraseQuery();
+      }
+
+      this.Filtering.removeAll();
+
+      this.Event.onGarbage();
+
+      _.forEach(this.customParametersChanged, (parameter: string): void => {
+
+        if (
+          this.customParameters &&
+          this.customParameters[parameter]
+        ) {
+
+          if (typeof this.customParameters[parameter].defaultValue !== 'undefined') {
+
+            this.searchParams[parameter] = this.customParameters[parameter].defaultValue || null;
+
+          }
+
+          if (typeof this.customParameters[parameter].reset === 'function') {
+
+            this
+              .customParameters[parameter]
+              .reset();
+
+          }
+
+        } else {
+
+          this.searchParams[parameter] = null;
+
+        }
+
+      });
+
+      this.customParametersChanged = [];
 
       this
         .Event
-        .onGarbage();
+        .onChange(this.searchParams);
 
     }
+
+  }
+
+  /**
+   * @method addParameter
+   * @param {string} name
+   * @param options
+   * @returns {NgSearchboxComponent}
+   */
+
+  public addParameter (name: string, options: any): NgSearchboxComponent {
+
+    this.customParameters[name] = _.extend({
+
+      'name': name
+
+    }, options);
+
+    if (options && typeof options.defaultValue !== 'undefined') {
+
+      this.searchParams[name] = options.defaultValue || null;
+
+    }
+
+    return this;
+
+  }
+
+  public upsertParameter (name: string, data: any): NgSearchboxComponent {
+
+    let self: NgSearchboxComponent = this;
+
+    this.searchParams[name] = data;
+
+    self
+      .Event
+      .onChange(
+        self.searchParams,
+        () => {
+
+          self
+            .customParametersChanged
+            .push(name);
+
+        }
+      );
+
+    return this;
 
   }
 

@@ -1,0 +1,31 @@
+div.test-component
+  label Search By ...
+  ul.search-option-list
+    li(
+      [ngClass]="{ 'active': (searchOption === '1') }"
+    )
+      input(
+        type="radio",
+        id="search-option-model",
+        name="searchOption",
+        [(ngModel)]="searchOption",
+        (ngModelChange)="change($event);",
+        value="1"
+      )
+      label(
+        for="search-option-model"
+      ) Model
+    li(
+      [ngClass]="{ 'active': (searchOption === '2') }"
+    )
+      input(
+        type="radio",
+        id="search-option-style",
+        name="searchOption",
+        [(ngModel)]="searchOption",
+        (ngModelChange)="change($event);",
+        value="2"
+      )
+      label(
+        for="search-option-style"
+      ) Style

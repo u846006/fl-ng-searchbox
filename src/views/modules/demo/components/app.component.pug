@@ -7,5 +7,6 @@ div.app
       [ngSearchBoxConfig]="config",
       [ngSearchBoxCacheFilter]="true",
       (onRegisterApi)="register($event);",
-      [placeholder]="'Search...'"
+      [placeholder]="'Search...'",
+      [ngSearchBoxDclAfter]="afterDclComponents"
     )

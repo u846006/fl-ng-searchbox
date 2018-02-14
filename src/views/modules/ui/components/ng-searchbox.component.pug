@@ -18,7 +18,7 @@ div.ng-searchbox
       )
         i.fa.fa-eraser
       span.ng-searchbox-button(
-        *ngIf="(hasQuery || (Filtering && Filtering.hasFilters))",
+        *ngIf="(hasQuery || (Filtering && Filtering.hasFilters) || (customParametersChanged && customParametersChanged.length))",
         (click)="handleGarbage();"
       )
         i.fa.fa-trash
@@ -26,6 +26,8 @@ div.ng-searchbox
         i.fa.fa-search(
           (click)="handleSearch();"
         )
+  div.ng-searchbox-dcl-bottom
+    div(#ngSearchboxDclBottom="")
   ng-searchbox-added-filters-wrapper(
     [ngClass]="{ 'active': (Filtering && Filtering.hasFilters) }",
     #ngSearchboxAddedFiltersWrapper="",

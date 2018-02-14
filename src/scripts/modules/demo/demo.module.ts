@@ -17,7 +17,6 @@ import { UiModule } from '../ui/ui.module';
 
 import { AppComponent } from './components/app.component';
 
-
 @NgModule({
 
   'imports': [

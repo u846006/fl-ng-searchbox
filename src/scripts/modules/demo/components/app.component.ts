@@ -6,6 +6,8 @@ import { Search } from '../../../interfaces/search';
 
 import { API } from '../../ui/services/api.service';
 
+import { TestComponent } from './test.component';
+
 @Component({
 
   'selector': 'app',
@@ -17,7 +19,8 @@ import { API } from '../../ui/services/api.service';
 })
 
 export class AppComponent {
-
+  
+  public afterDclComponents: any[] = [TestComponent];
 
   public filters: Search.AvailableFilter[] = [
 
@@ -124,6 +127,11 @@ export class AppComponent {
       .on('onFilterChanged', (...args): void => {
 
         console.log('filter', args);
+
+      })
+      .on('onGarbage', function (...args) {
+
+        console.log('garbage', args);
 
       })
       .on('onChange', function (...args) {
