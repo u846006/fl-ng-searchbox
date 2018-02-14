@@ -15,6 +15,7 @@
       "styles": [
         "styles/app.sass"
       ],
+      "showCircularDependencies": false,
       "scripts": [],
       "environmentSource": "scripts/environments/environment.ts",
       "environments": {

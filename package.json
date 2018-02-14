@@ -1,6 +1,6 @@
 {
   "name": "ng-searchbox",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Advanced Searchbox",
   "scripts": {
     "start": "ng serve",
