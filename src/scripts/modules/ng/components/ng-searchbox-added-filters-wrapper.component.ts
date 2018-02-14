@@ -22,9 +22,9 @@ import { Search } from '../../../interfaces/search';
 
   'selector': 'ng-searchbox-added-filters-wrapper',
 
-  'templateUrl': '../../../../views/modules/ui/components/ng-searchbox-added-filters-wrapper.component.pug',
+  'templateUrl': '../../../../views/modules/ng/components/ng-searchbox-added-filters-wrapper.component.pug',
 
-  'styleUrls': ['../../../../styles/modules/ui/components/ng-searchbox-added-filters-wrapper.component.sass'],
+  'styleUrls': ['../../../../styles/modules/ng/components/ng-searchbox-added-filters-wrapper.component.sass'],
 
   'entryComponents': [
     NgSearchboxAddedFilter

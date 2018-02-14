@@ -15,7 +15,7 @@ import { NgSearchboxFilterSelectors } from './components/ng-searchbox-filter-sel
 import { MemoryService } from './services/memory.service';
 import { UtilsService } from './services/utils.service';
 
-import './ui.font-awesome';
+import './ng-searchbox.font-awesome';
 
 @NgModule({
 
@@ -34,19 +34,6 @@ import './ui.font-awesome';
   ],
 
   'providers': [
-    {
-
-      'provide': Window,
-
-      'useValue': window
-
-    }, {
-
-      'provide': Document,
-
-      'useValue': document
-
-    },
     MemoryService,
     UtilsService
   ],
@@ -57,4 +44,4 @@ import './ui.font-awesome';
 
 })
 
-export class UiModule {}
+export class NgSearchboxModule {}

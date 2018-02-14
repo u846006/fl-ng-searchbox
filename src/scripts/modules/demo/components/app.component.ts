@@ -4,9 +4,7 @@ import { Component } from '@angular/core';
 
 import { Search } from '../../../interfaces/search';
 
-import { API } from '../../ui/services/api.service';
-
-import { TestComponent } from './test.component';
+import { API } from '../../ng/services/api.service';
 
 @Component({
 
@@ -20,7 +18,7 @@ import { TestComponent } from './test.component';
 
 export class AppComponent {
   
-  public afterDclComponents: any[] = [TestComponent];
+  public afterDclComponents: any[] = ['TestComponent'];
 
   public filters: Search.AvailableFilter[] = [
 

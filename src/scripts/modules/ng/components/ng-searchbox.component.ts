@@ -21,6 +21,7 @@ import {
   Injector,
   NgModuleRef,
   NgModule,
+  ComponentFactoryResolver, ComponentFactory
 } from '@angular/core';
 
 import { UtilsService } from '../services/utils.service';
@@ -32,14 +33,15 @@ import { API } from '../services/api.service';
 import { Search, ModifiedSearch } from '../../../interfaces/search';
 
 import { NgSearchboxAddedFiltersWrapper } from './ng-searchbox-added-filters-wrapper.component';
+import {ANGULAR_FACTORIES} from "../../../constants/angular.constant";
 
 @Component({
 
   'selector': 'ng-searchbox',
 
-  'templateUrl': '../../../../views/modules/ui/components/ng-searchbox.component.pug',
+  'templateUrl': '../../../../views/modules/ng/components/ng-searchbox.component.pug',
 
-  'styleUrls': ['../../../../styles/modules/ui/components/ng-searchbox.component.sass']
+  'styleUrls': ['../../../../styles/modules/ng/components/ng-searchbox.component.sass']
 
 })
 
@@ -65,7 +67,7 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
   @Input('ngSearchBoxFilterOperators') public ngSearchBoxFilterOperators: any = null;
 
-  @Input('ngSearchBoxDclAfter') public ngSearchBoxDclAfter: any[] = [];
+  @Input('ngSearchBoxDclAfter') public ngSearchBoxDclAfter: string[] = [];
 
   @Input('placeholder') public placeholder: string = '';
 
@@ -106,11 +108,11 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
   constructor (
     public element: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
+    private componentFactoryResolver: ComponentFactoryResolver,
     private compiler: Compiler,
     private injector: Injector,
     private module: NgModuleRef<any>,
-    public utils: UtilsService,
-    @Inject(Window) public window: Window
+    public utils: UtilsService
   ) {
 
     return this;
@@ -178,9 +180,51 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
   }
 
+  private getFactoryEntry (type: string): any {
+
+    let t: any = null;
+
+    if (
+      this.componentFactoryResolver &&
+      this.componentFactoryResolver[ANGULAR_FACTORIES]
+    ) {
+
+      let factory: any = this.componentFactoryResolver[ANGULAR_FACTORIES];
+
+      if (
+        factory &&
+        typeof factory.entries === 'function'
+      ) {
+
+        let entries: any[] = Array.from(factory.entries());
+
+        _.forEach(entries, (entry: any[]): void => {
+
+          let component: Function = entry[0];
+
+          if (
+            component &&
+            component.name &&
+            type === component.name
+          ) {
+
+            t = entry[1];
+
+          }
+
+        });
+
+      }
+
+    }
+
+    return t;
+
+  }
+
   private constructDclAfterComponents (): NgSearchboxComponent {
 
-    let names: any[] = this.ngSearchBoxDclAfter;
+    let names: string[] = this.ngSearchBoxDclAfter;
 
     if (!_.isArray(names)) {
 
@@ -188,37 +232,17 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
     }
 
-    _.forEach(names, (component: any): void => {
+    _.forEach(names, (name: string): void => {
 
-      if (component) {
+      let factory: ComponentFactory<any> = this.getFactoryEntry(name);
 
-        let module = NgModule({
+      if (factory) {
 
-          'imports': [
-            FormsModule,
-            CommonModule
-          ],
-
-          'declarations': [
-            component
-          ]
-
-        })(class {});
+        let cmpRef = factory.create(this.injector, [], null, this.module);
 
         this
-          .compiler
-          .compileModuleAndAllComponentsAsync(module)
-          .then((factories) => {
-
-            let f = factories.componentFactories[0],
-
-              cmpRef = f.create(this.injector, [], null, this.module);
-
-            this
-              .ngSearchboxDclBottom
-              .insert(cmpRef.hostView);
-
-          });
+          .ngSearchboxDclBottom
+          .insert(cmpRef.hostView);
 
       }
 

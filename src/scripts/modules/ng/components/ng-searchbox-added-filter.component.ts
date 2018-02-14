@@ -3,8 +3,7 @@
 import {
   Component,
   ViewChild,
-  ElementRef,
-  Inject
+  ElementRef
 } from '@angular/core';
 
 import { FilteringService } from '../services/filtering.service';
@@ -16,13 +15,15 @@ import { NgSearchboxFilterSelectors } from './ng-searchbox-filter-selectors.comp
 
 import { ModifiedSearch } from '../../../interfaces/search';
 
+declare let window: Window;
+
 @Component({
 
   'selector': 'ng-searchbox-added-filter',
 
-  'templateUrl': '../../../../views/modules/ui/components/ng-searchbox-added-filter.component.pug',
+  'templateUrl': '../../../../views/modules/ng/components/ng-searchbox-added-filter.component.pug',
 
-  'styleUrls': ['../../../../styles/modules/ui/components/ng-searchbox-added-filter.component.sass']
+  'styleUrls': ['../../../../styles/modules/ng/components/ng-searchbox-added-filter.component.sass']
 
 })
 
@@ -49,8 +50,7 @@ export class NgSearchboxAddedFilter {
   private proxiedFunction: EventListenerOrEventListenerObject;
 
   constructor (
-    private utils: UtilsService,
-    @Inject(Window) private window: Window
+    private utils: UtilsService
   ) {
 
     this.uuid = this.utils.uuid();
@@ -115,9 +115,7 @@ export class NgSearchboxAddedFilter {
 
         };
 
-        self
-          .window
-          .addEventListener('click', self.proxiedFunction);
+        window.addEventListener('click', self.proxiedFunction);
 
       }, 25);
 
@@ -125,9 +123,7 @@ export class NgSearchboxAddedFilter {
 
     } else {
 
-      self
-        .window
-        .removeEventListener('click', this.proxiedFunction);
+      window.removeEventListener('click', this.proxiedFunction);
 
       self.closeFilter();
 
@@ -145,9 +141,7 @@ export class NgSearchboxAddedFilter {
 
       setTimeout((): void => {
 
-        this
-          .window
-          .addEventListener('click', this.proxiedFunction);
+        window.addEventListener('click', this.proxiedFunction);
 
       }, 25);
 
@@ -264,9 +258,7 @@ export class NgSearchboxAddedFilter {
 
     if (!element.contains(target)) {
 
-      this
-        .window
-        .removeEventListener('click', this.proxiedFunction);
+      window.removeEventListener('click', this.proxiedFunction);
 
       this.toggleActivation(false);
 

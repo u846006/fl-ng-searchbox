@@ -8,7 +8,7 @@ import {
   OnInit
 } from '@angular/core';
 
-import { NgSearchboxComponent } from '../../ui/components/ng-searchbox.component';
+import { NgSearchboxComponent } from '../../ng/components/ng-searchbox.component';
 
 @Component({
 

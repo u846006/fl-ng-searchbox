@@ -20,9 +20,9 @@ import { Search, ModifiedSearch } from '../../../interfaces/search';
 
   'selector': 'ng-searchbox-filter-selectors',
 
-  'templateUrl': '../../../../views/modules/ui/components/ng-searchbox-filter-selectors.component.pug',
+  'templateUrl': '../../../../views/modules/ng/components/ng-searchbox-filter-selectors.component.pug',
 
-  'styleUrls': ['../../../../styles/modules/ui/components/ng-searchbox-filter-selectors.component.sass']
+  'styleUrls': ['../../../../styles/modules/ng/components/ng-searchbox-filter-selectors.component.sass']
 
 })
 

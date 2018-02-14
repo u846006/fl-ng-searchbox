@@ -19,13 +19,15 @@ import { NgSearchboxAddedFilter } from './ng-searchbox-added-filter.component';
 
 import { FilteringService } from '../services/filtering.service';
 
+declare let window: Window;
+
 @Component({
 
   'selector': 'ng-searchbox-filter-operators',
 
-  'templateUrl': '../../../../views/modules/ui/components/ng-searchbox-filter-operators.component.pug',
+  'templateUrl': '../../../../views/modules/ng/components/ng-searchbox-filter-operators.component.pug',
 
-  'styleUrls': ['../../../../styles/modules/ui/components/ng-searchbox-filter-operators.component.sass'],
+  'styleUrls': ['../../../../styles/modules/ng/components/ng-searchbox-filter-operators.component.sass'],
 
 })
 
@@ -47,7 +49,6 @@ export class NgSearchboxFilterOperators implements AfterViewInit {
 
   constructor (
     @Inject(forwardRef(() => NgSearchboxAddedFilter)) private ngAddedFilter: NgSearchboxAddedFilter,
-    @Inject(Window) private window: Window,
     private element: ElementRef
   ) {
 
@@ -89,17 +90,13 @@ export class NgSearchboxFilterOperators implements AfterViewInit {
 
         };
 
-        self
-          .window
-          .addEventListener('click', self.proxiedFunction);
+        window.addEventListener('click', self.proxiedFunction);
 
       }, 25);
 
     } else {
 
-      self
-        .window
-        .removeEventListener('click', this.proxiedFunction);
+      window.removeEventListener('click', this.proxiedFunction);
 
     }
 

@@ -2,9 +2,9 @@
 
 import { ComponentRef } from '@angular/core';
 
-import { NgSearchboxComponent } from '../modules/ui/components/ng-searchbox.component';
-import { NgSearchboxFilterOperators } from '../modules/ui/components/ng-searchbox-filter-operators.component';
-import { NgSearchboxAddedFilter } from '../modules/ui/components/ng-searchbox-added-filter.component';
+import { NgSearchboxComponent } from '../modules/ng/components/ng-searchbox.component';
+import { NgSearchboxFilterOperators } from '../modules/ng/components/ng-searchbox-filter-operators.component';
+import { NgSearchboxAddedFilter } from '../modules/ng/components/ng-searchbox-added-filter.component';
 
 export namespace Search {
 

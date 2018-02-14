@@ -23,9 +23,9 @@ import { UtilsService } from '../services/utils.service';
 
   'selector': 'ng-searchbox-filtering',
 
-  'templateUrl': '../../../../views/modules/ui/components/ng-searchbox-filtering.component.pug',
+  'templateUrl': '../../../../views/modules/ng/components/ng-searchbox-filtering.component.pug',
 
-  'styleUrls': ['../../../../styles/modules/ui/components/ng-searchbox-filtering.component.sass']
+  'styleUrls': ['../../../../styles/modules/ng/components/ng-searchbox-filtering.component.sass']
 
 })
 

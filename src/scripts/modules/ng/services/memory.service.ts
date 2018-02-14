@@ -1,6 +1,8 @@
 'use strict';
 
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+
+declare let window: Window;
 
 @Injectable()
 export class MemoryService {
@@ -9,9 +11,7 @@ export class MemoryService {
 
   public storage: Storage = null;
 
-  constructor (
-    @Inject(Window) private window: Window
-  ) {
+  constructor () {
 
     this.storage = window.localStorage;
 

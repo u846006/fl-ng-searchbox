@@ -2,16 +2,15 @@
 
 import {
   Injectable,
-  ElementRef,
-  Inject
+  ElementRef
 } from '@angular/core';
+
+declare let window: Window;
 
 @Injectable()
 export class UtilsService {
 
-  constructor (
-    @Inject(Window) private window: Window
-  ) {
+  constructor () {
 
     return this;
 

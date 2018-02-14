@@ -8,6 +8,8 @@ import {NgSearchboxComponent} from '../components/ng-searchbox.component';
 
 import { SearchboxEvent } from '../../../constants/events.constant';
 
+declare let window: Window;
+
 @Injectable()
 export class EventHandling {
 
@@ -81,10 +83,7 @@ export class EventHandling {
 
     if (this.timer) {
 
-      this
-        .ngSearchBoxComponent
-        .window
-        .clearTimeout(this.timer);
+      window.clearTimeout(this.timer);
 
       this.timer = null;
 
@@ -95,16 +94,13 @@ export class EventHandling {
       this.ngSearchBoxComponent.ngSearchBoxConfig.delay
     ) {
 
-      this.timer = this
-        .ngSearchBoxComponent
-        .window
-        .setTimeout((): void => {
+      window.setTimeout((): void => {
 
-          invocation();
+        invocation();
 
-          this.fire(SearchboxEvent.ON_CHANGE, parameters);
+        this.fire(SearchboxEvent.ON_CHANGE, parameters);
 
-        }, this.ngSearchBoxComponent.ngSearchBoxConfig.delay);
+      }, this.ngSearchBoxComponent.ngSearchBoxConfig.delay);
 
     } else {
 

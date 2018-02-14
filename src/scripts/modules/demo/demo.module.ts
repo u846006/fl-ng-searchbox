@@ -13,9 +13,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { UiModule } from '../ui/ui.module';
+import { NgSearchboxModule } from '../ng/ng-searchbox.module';
 
 import { AppComponent } from './components/app.component';
+import { TestComponent } from './components/test.component';
 
 @NgModule({
 
@@ -25,16 +26,21 @@ import { AppComponent } from './components/app.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    NgSearchboxModule
   ],
 
   'declarations': [
-    AppComponent
+    AppComponent,
+    TestComponent
   ],
 
   'providers': [],
 
-  'bootstrap': [AppComponent]
+  'bootstrap': [AppComponent],
+
+  'entryComponents': [
+    TestComponent
+  ]
 
 })
 

@@ -2,7 +2,8 @@
 
 [![Love](https://img.shields.io/badge/Made%20with-%E2%9D%A4-orange.svg)](https://github.com/tybeck/ng-searchbox#)&nbsp;&nbsp;
 [![Dependencies](https://img.shields.io/david/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)&nbsp;&nbsp;
-[![DevDependencies](https://img.shields.io/david/dev/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)
+[![DevDependencies](https://img.shields.io/david/dev/tybeck/ng-searchbox.svg)](https://github.com/tybeck/ng-searchbox#)&nbsp;&nbsp;
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 ## NgSearchbox - Alpha
 
