@@ -29,7 +29,8 @@
     "npm": ">= 3.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "tools"
   ],
   "dependencies": {
     "@angular/cdk": "^5.1.1",
