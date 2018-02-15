@@ -2,7 +2,7 @@
 
 import { Search } from '../interfaces/search';
 
-export const OPERATORS: Search.Operator[] = [
+export const NgSearchboxOperators: Search.Operator[] = [
   {
     'name': 'AND',
     'selected': true

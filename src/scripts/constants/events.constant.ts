@@ -1,4 +1,4 @@
-export class SearchboxEvent {
+export class NgSearchboxEvent {
 
   public static readonly ON_CHANGE: string = 'onChange';
 

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 import { Search } from '../../../interfaces/search';
 
-import { SearchboxEvent } from '../../../constants/events.constant';
+import { NgSearchboxEvent } from '../../../constants/events.constant';
 
 @Injectable()
 export class API {
@@ -178,13 +178,13 @@ export class API {
 
     let validType: boolean = false,
 
-      names: string[] = Object.keys(SearchboxEvent),
+      names: string[] = Object.keys(NgSearchboxEvent),
 
       types: string[] = [];
 
     _.map(names, (name: string): void => {
 
-      types.push(SearchboxEvent[name]);
+      types.push(NgSearchboxEvent[name]);
 
     });
 

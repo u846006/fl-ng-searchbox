@@ -12,7 +12,7 @@ import {
 
 import { NgSearchboxAddedFilter } from './ng-searchbox-added-filter.component';
 
-import { SELECTORS } from '../../../constants/selectors.constant';
+import { NgSearchboxSelectors } from '../../../constants/selectors.constant';
 
 import { Search, ModifiedSearch } from '../../../interfaces/search';
 
@@ -30,7 +30,7 @@ export class NgSearchboxFilterSelectors implements AfterViewInit {
 
   @Input('filter') public filter: ModifiedSearch.ModifiedFilter = null;
 
-  public selectors: Search.Selector[] = _.clone(SELECTORS);
+  public selectors: Search.Selector[] = _.clone(NgSearchboxSelectors);
 
   public shownStatus: boolean = true;
 

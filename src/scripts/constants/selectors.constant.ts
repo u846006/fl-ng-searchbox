@@ -2,7 +2,7 @@
 
 import { Search } from '../interfaces/search';
 
-export const SELECTORS: Search.Selector[] = [
+export const NgSearchboxSelectors: Search.Selector[] = [
   {
     'name': 'Contains',
     'key': 'contains',

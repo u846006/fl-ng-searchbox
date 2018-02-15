@@ -9,11 +9,11 @@ let pkg = require('./package.json'),
 
 export default {
 
-  'input': 'dist/index.js',
+  'input': 'core/index.js',
 
   'output': {
 
-    'file':'dist/bundles/searchbox.umd.js',
+    'file': 'core/bundles/searchbox.umd.js',
 
     'format': 'umd'
 

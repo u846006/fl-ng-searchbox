@@ -6,7 +6,7 @@ import { ModifiedSearch, Search } from '../../../interfaces/search';
 
 import {NgSearchboxComponent} from '../components/ng-searchbox.component';
 
-import { SearchboxEvent } from '../../../constants/events.constant';
+import { NgSearchboxEvent } from '../../../constants/events.constant';
 
 declare let window: Window;
 
@@ -98,7 +98,7 @@ export class EventHandling {
 
         invocation();
 
-        this.fire(SearchboxEvent.ON_CHANGE, parameters);
+        this.fire(NgSearchboxEvent.ON_CHANGE, parameters);
 
       }, this.ngSearchBoxComponent.ngSearchBoxConfig.delay);
 
@@ -106,7 +106,7 @@ export class EventHandling {
 
       invocation();
 
-      this.fire(SearchboxEvent.ON_CHANGE, parameters);
+      this.fire(NgSearchboxEvent.ON_CHANGE, parameters);
 
     }
 

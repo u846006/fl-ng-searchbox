@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * @name Pug Loader
+ * @desc This is primarily used to convert pug files on-the-fly with
+ * JIT/AOT compilation in angular; we use this for our testing ...
+ * checkout `asset-converter` for converting template/style urls to their
+ * actual resource for distribution.
+ */
+
 (async () => {
 
   const fs = require('fs');

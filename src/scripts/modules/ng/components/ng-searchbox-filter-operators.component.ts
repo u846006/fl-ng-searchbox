@@ -13,7 +13,7 @@ import {
 
 import { ModifiedSearch, Search } from '../../../interfaces/search';
 
-import { OPERATORS } from '../../../constants/operators.constant';
+import { NgSearchboxOperators } from '../../../constants/operators.constant';
 
 import { NgSearchboxAddedFilter } from './ng-searchbox-added-filter.component';
 
@@ -35,7 +35,7 @@ export class NgSearchboxFilterOperators implements AfterViewInit {
 
   @Input('filter') public filter: ModifiedSearch.ModifiedFilter = null;
 
-  public operators: Search.Operator[] = _.clone(OPERATORS);
+  public operators: Search.Operator[] = _.clone(NgSearchboxOperators);
 
   public selectedOperator: Search.Operator = null;
 
