@@ -1,6 +1,6 @@
 {
   "name": "ng-searchbox",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Advanced Searchbox",
   "main": "core/bundles/searchbox.umd.js",
   "module": "index.js",
