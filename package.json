@@ -2,7 +2,7 @@
   "name": "ng-searchbox",
   "version": "0.3.3",
   "description": "Advanced Searchbox",
-  "main": "dist/bundles/searchbox.umd.js",
+  "main": "bundles/searchbox.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
   "scripts": {
@@ -29,7 +29,11 @@
     "npm": ">= 3.0.0"
   },
   "files": [
-    "dist",
+    "dist/src",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.metadata.json",
+    "dist/bundles",
     "tools"
   ],
   "dependencies": {
