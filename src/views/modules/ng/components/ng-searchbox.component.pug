@@ -31,6 +31,5 @@ div.ng-searchbox
   ng-searchbox-added-filters-wrapper(
     [ngClass]="{ 'active': (Filtering && Filtering.hasFilters) }",
     #ngSearchboxAddedFiltersWrapper="",
-    [observer]="onChange",
-    class="ng-clearfix"
+    [observer]="onChange"
   )

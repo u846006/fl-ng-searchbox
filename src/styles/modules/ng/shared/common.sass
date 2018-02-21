@@ -1,0 +1,13 @@
+@mixin clear()
+
+  &.ng-searchbox-group:before,
+  &.ng-searchbox-group:after
+
+    content: ""
+    display: table
+
+  &.ng-searchbox-group:after
+    clear: both
+
+  &.ng-searchbox-group
+    zoom: 1 /* For IE 6/7 (trigger hasLayout) */

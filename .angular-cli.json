@@ -12,9 +12,6 @@
       "main": "scripts/main.ts",
       "polyfills": "scripts/polyfills.ts",
       "tsconfig": "tsconfig.app.json",
-      "styles": [
-        "styles/app.sass"
-      ],
       "showCircularDependencies": false,
       "scripts": [],
       "environmentSource": "scripts/environments/environment.ts",
