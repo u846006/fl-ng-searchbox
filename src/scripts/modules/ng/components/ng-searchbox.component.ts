@@ -139,7 +139,7 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
     let self: NgSearchboxComponent = <NgSearchboxComponent>this;
 
-    this.Api = new API();
+    this.Api = new API(self);
 
     this.Event = new EventHandling(self);
 

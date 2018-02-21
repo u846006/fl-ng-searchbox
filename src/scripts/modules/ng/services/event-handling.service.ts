@@ -4,7 +4,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { ModifiedSearch, Search } from '../../../interfaces/search';
 
-import {NgSearchboxComponent} from '../components/ng-searchbox.component';
+import { NgSearchboxComponent } from '../components/ng-searchbox.component';
 
 import { NgSearchboxEvent } from '../../../constants/events.constant';
 
@@ -13,21 +13,11 @@ declare let window: Window;
 @Injectable()
 export class EventHandling {
 
-  public emitter: EventEmitter<any>;
-
   public timer: any = null;
 
   constructor (
     private ngSearchBoxComponent: NgSearchboxComponent
   ) {
-
-    return this;
-
-  }
-
-  public init (): EventHandling {
-
-    this.emitter = new EventEmitter<any>();
 
     return this;
 
@@ -94,7 +84,7 @@ export class EventHandling {
       this.ngSearchBoxComponent.ngSearchBoxConfig.delay
     ) {
 
-      window.setTimeout((): void => {
+      this.timer = window.setTimeout((): void => {
 
         invocation();
 

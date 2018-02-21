@@ -70,6 +70,18 @@ export namespace Search {
 
   }
 
+  export interface SelectedFilter {
+
+    name?: string;
+
+    value?: string;
+
+    isAllowedEmptyValue?: boolean;
+
+    hideWhenAdded?: boolean;
+
+  }
+
   export interface AvailableFilter {
 
     name: string;
@@ -161,6 +173,22 @@ export namespace ModifiedSearch {
     selector?: Search.Selector;
 
     operator?: Search.Operator;
+
+    /**
+     * @property isAllowedEmptyValue
+     * @default false
+     * defaults to false
+     */
+
+    isAllowedEmptyValue?: boolean;
+
+    /**
+     * @property hideWhenAdded
+     * @default false
+     * Hide this filter when initially added
+     */
+
+    hideWhenAdded?: boolean;
 
   }
 

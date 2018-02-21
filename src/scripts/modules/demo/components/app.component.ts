@@ -17,7 +17,7 @@ import { API } from '../../ng/services/api.service';
 })
 
 export class AppComponent {
-  
+
   public afterDclComponents: any[] = ['TestComponent'];
 
   public filters: Search.AvailableFilter[] = [
@@ -106,6 +106,8 @@ export class AppComponent {
 
     console.log(api);
 
+    api.addFilter(['vendor_abbr', 'vendor_desc']);
+
     api
       .on('onQueryAdded', (...args): void => {
 
@@ -127,24 +129,16 @@ export class AppComponent {
         console.log('filter', args);
 
       })
-      .on('onGarbage', function (...args) {
+      .on('onGarbage', (...args): void => {
 
         console.log('garbage', args);
 
       })
-      .on('onChange', function (...args) {
+      .on('onChange', (...args): void => {
 
         console.log('change...', args);
 
       });
-
-    console.log(this.filters, this.filters.length);
-
-    setTimeout(() => {
-
-      console.log(this.filters, this.filters.length);
-
-    }, 1000);
 
   }
 

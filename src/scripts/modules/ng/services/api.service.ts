@@ -4,16 +4,20 @@ import * as _ from 'lodash';
 
 import { Injectable } from '@angular/core';
 
-import { Search } from '../../../interfaces/search';
+import {ModifiedSearch, Search} from '../../../interfaces/search';
 
 import { NgSearchboxEvent } from '../../../constants/events.constant';
+
+import { NgSearchboxComponent } from '../components/ng-searchbox.component';
 
 @Injectable()
 export class API {
 
   public $$registeredEvents: Search.RegisteredEvent[] = <Search.RegisteredEvent[]>[];
 
-  constructor () {
+  constructor (
+    private ngSearchBoxComponent: NgSearchboxComponent
+  ) {
 
     return this;
 
@@ -147,6 +151,81 @@ export class API {
           .splice(addedObject.length - 1 - addedIndex, 1);
 
       });
+
+    return this;
+
+  }
+
+  /**
+   * @method addFilter
+   * Add filter automatically
+   * @returns {API}
+   */
+
+  public addFilter (filter: string|string[]|Search.SelectedFilter|Search.SelectedFilter[]): API {
+
+    let filters = [];
+
+    if (_.isArray(filter)) {
+
+      filters = <any[]>filter;
+
+    } else {
+
+      filters = [filter];
+
+    }
+
+    filters.forEach((item: string|Search.SelectedFilter): void => {
+
+      let f: Search.SelectedFilter = {};
+
+      if (typeof item === 'string') {
+
+        f.name = item;
+
+      } else {
+
+        f = item;
+
+      }
+
+      if (f.name) {
+
+        let availableFilters: Search.AvailableFilter[] = this.ngSearchBoxComponent.ngSearchBoxFiltering,
+
+          foundFilter: Search.AvailableFilter = _.find(availableFilters, { 'name': f.name });
+
+        if (foundFilter) {
+
+          f.isAllowedEmptyValue = true;
+
+          f.hideWhenAdded = true;
+
+          if (!f.value) {
+
+            f.value = '';
+
+          }
+
+          setTimeout(() => {
+
+            this
+              .ngSearchBoxComponent
+              .Filtering
+              .add(foundFilter, f);
+
+          });
+
+        }
+
+      } else {
+
+        throw new Error('NgSearchbox API - Missing \'name\' key!');
+
+      }
+
+    });
 
     return this;
 

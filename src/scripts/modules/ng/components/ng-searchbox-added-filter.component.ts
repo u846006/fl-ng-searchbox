@@ -30,7 +30,7 @@ declare let window: Window;
 export class NgSearchboxAddedFilter {
 
   @ViewChild('ngSearchboxAddedFilter') public ngSearchboxAddedFilter: ElementRef;
-  
+
   @ViewChild('ngFilterSelectors') public ngFilterSelectors: NgSearchboxFilterSelectors;
 
   public Filtering: FilteringService = null;
@@ -73,7 +73,23 @@ export class NgSearchboxAddedFilter {
 
     this.searchbox = searchbox;
 
-    this.toggleActivation();
+    if (filter.value) {
+
+      this.v = filter.value;
+
+    }
+
+    if (filter.hideWhenAdded) {
+
+      this.toggleActivation();
+
+      this.closeFilter();
+
+    } else {
+
+      this.toggleActivation();
+
+    }
 
     return this;
 
@@ -178,7 +194,10 @@ export class NgSearchboxAddedFilter {
 
   public closeFilter (): NgSearchboxAddedFilter {
 
-    if (!this.filter.value) {
+    if (
+      !this.filter.value &&
+      !this.filter.isAllowedEmptyValue
+    ) {
 
       this
         .Filtering

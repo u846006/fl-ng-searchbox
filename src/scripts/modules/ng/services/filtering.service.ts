@@ -50,7 +50,7 @@ export class FilteringService {
     this.utils = this.searchbox.utils;
 
     return this;
-    
+
   }
 
   public getPublisher (): EventEmitter<ModifiedSearch.ModifiedFilter[]> {
@@ -165,7 +165,7 @@ export class FilteringService {
 
   }
 
-  public add (filter: Search.AvailableFilter): void {
+  public add (filter: Search.AvailableFilter, selectedFilter: Search.SelectedFilter = {}): void {
 
     let factory = this
       .ngSearchboxAddedFilters
@@ -179,21 +179,13 @@ export class FilteringService {
         .ngSearchboxAddedFiltersViewContainer
         .createComponent(factory);
 
-    let modifiedFilter: ModifiedSearch.ModifiedFilter =
+    let modifiedFilter: ModifiedSearch.ModifiedFilter = <ModifiedSearch.ModifiedFilter>_.clone(filter);
 
-      <ModifiedSearch.ModifiedFilter>_.clone(filter);
-
-    modifiedFilter.uuid = this
-      .utils
-      .uuid();
+    modifiedFilter.uuid = this.utils.uuid();
 
     cmpRef
       .instance
-      .set(
-        this,
-        this.searchbox,
-        modifiedFilter
-      );
+      .set(this, this.searchbox, _.extend(modifiedFilter, selectedFilter));
 
     this
       .addedFilters
@@ -205,11 +197,12 @@ export class FilteringService {
 
       });
 
-    if (this.addedFilters &&
+    if (
+      this.addedFilters &&
+      this.addedFilters.length
+    ) {
 
-      this.addedFilters.length) {
-
-        this.hasFilters = true;
+      this.hasFilters = true;
 
     }
 
@@ -452,9 +445,7 @@ export class FilteringService {
 
   }
 
-  public update (
-    filter?: ModifiedSearch.ModifiedFilter
-  ): void {
+  public update (filter?: ModifiedSearch.ModifiedFilter): void {
 
     let self: FilteringService = <FilteringService>this,
 
@@ -464,30 +455,32 @@ export class FilteringService {
       .addedFilters
       .forEach((addedFilter: AddedFilter): void => {
 
-        if (
-          filter &&
-          addedFilter.filter.uuid === filter.uuid
-        ) {
+        if (addedFilter.filter.value) {
 
-          addedFilter.filter = filter;
+          if (
+            filter &&
+            addedFilter.filter.uuid === filter.uuid
+          ) {
+
+            addedFilter.filter = filter;
+
+          }
+
+          let modifiedFilter: ModifiedSearch.ModifiedFilter = self.buildParameter(addedFilter.filter);
+
+          _.extend(addedFilter.filter, {
+
+            '$$timestamp': modifiedFilter.$$timestamp,
+
+            '$$modified': modifiedFilter.$$modified,
+
+            '$$lastValue': modifiedFilter.$$lastValue
+
+          });
+
+          params.push(modifiedFilter);
 
         }
-
-        let modifiedFilter: ModifiedSearch.ModifiedFilter = self.buildParameter(
-          addedFilter.filter
-        );
-
-        _.extend(addedFilter.filter, {
-
-          '$$timestamp': modifiedFilter.$$timestamp,
-
-          '$$modified': modifiedFilter.$$modified,
-
-          '$$lastValue': modifiedFilter.$$lastValue
-
-        });
-
-        params.push(modifiedFilter);
 
       });
 

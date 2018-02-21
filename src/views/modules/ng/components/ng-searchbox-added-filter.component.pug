@@ -25,10 +25,11 @@ div.ng-searchbox-added-filter(
     div.filter-section(
       *ngIf="filter && filter.value && !filter.editing"
     )
-      span(
-        [innerText]="filter.value"
-        class="filter-value"
-      )
+      span.filter-value([innerText]="filter.value")
+    div.filter-section(
+      *ngIf="filter && !filter.value && !filter.editing"
+    )
+      span.filter-value Empty
     div.filter-section(
       *ngIf="filter && filter.editing"
     )
