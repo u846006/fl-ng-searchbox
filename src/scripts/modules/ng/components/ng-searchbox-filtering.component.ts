@@ -1,5 +1,7 @@
 'use strict';
 
+import * as _ from 'lodash';
+
 import {
   Component,
   Input,
@@ -130,9 +132,7 @@ export class NgSearchboxFilteringComponent implements AfterViewInit {
                   .ngSearchBoxFiltering
               );
 
-              self.Filtering = self
-                .searchbox
-                .Filtering;
+              self.Filtering = self.searchbox.Filtering;
 
             }
 
@@ -145,6 +145,46 @@ export class NgSearchboxFilteringComponent implements AfterViewInit {
           .detectChanges();
 
       });
+
+  }
+
+  public setFilters (filters: Search.AvailableFilter[]): void {
+
+    this.availableFilters = this.excludeFromFilters(filters);
+
+  }
+
+  public addToFilterList (filter: Search.AvailableFilter): void {
+
+    this
+      .availableFilters
+      .push(filter);
+
+  }
+
+  public removeFromFilterList (filter: string|Search.AvailableFilter): void {
+
+    let name: string = null;
+
+    if (typeof filter === 'string') {
+
+      name = filter;
+
+    } else {
+
+      name = filter.name;
+
+    }
+
+    let index: number = _.findIndex(this.availableFilters, { 'name' : name });
+
+    if (index !== -1) {
+
+      this
+        .availableFilters
+        .splice(index, 1);
+
+    }
 
   }
 
@@ -236,6 +276,12 @@ export class NgSearchboxFilteringComponent implements AfterViewInit {
         });
 
     }
+
+  }
+
+  public get getAvailableFilters (): Search.AvailableFilter[] {
+
+    return this.availableFilters;
 
   }
 

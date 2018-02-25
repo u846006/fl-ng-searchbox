@@ -108,6 +108,25 @@ export class AppComponent {
 
     api.addFilter(['vendor_abbr', 'vendor_desc']);
 
+    api.addFilterToMenu({
+      'name': 'bm_legacy_sku',
+      'displayName': 'Legacy SKU',
+      'root': 'Product',
+      'multi': true
+    });
+
+    api.addFilter(['bm_legacy_sku']);
+
+    setTimeout(() => {
+
+      api.removeFilterFromMenu('bm_legacy_sku');
+
+      console.log('removed.');
+
+    }, 10000);
+
+    console.log(this.filters);
+
     api
       .on('onQueryAdded', (...args): void => {
 

@@ -156,9 +156,68 @@ export class API {
 
   }
 
+  public addFilterToMenu (filter: Search.SelectedFilter|Search.AvailableFilter[]): API {
+
+    let filters = [];
+
+    if (_.isArray(filter)) {
+
+      filters = <any[]>filter;
+
+    } else {
+
+      filters = [filter];
+
+    }
+
+    filters.forEach((item: Search.AvailableFilter): void => {
+
+      this
+        .ngSearchBoxComponent
+        .ngSearchboxFilteringComponent
+        .addToFilterList(item);
+
+    });
+
+    return this;
+
+  }
+
+  public removeFilterFromMenu (filter: string|string[]|Search.AvailableFilter|Search.AvailableFilter[]): API {
+
+    let filters = [];
+
+    if (_.isArray(filter)) {
+
+      filters = <any[]>filter;
+
+    } else {
+
+      filters = [filter];
+
+    }
+
+    filters.forEach((item: string|Search.AvailableFilter): void => {
+
+      this
+        .ngSearchBoxComponent
+        .ngSearchboxFilteringComponent
+        .removeFromFilterList(item);
+
+      this
+        .ngSearchBoxComponent
+        .Filtering
+        .removeByFilterType(item);
+
+    });
+
+    return this;
+
+  }
+
   /**
    * @method addFilter
-   * Add filter automatically
+   * Add filters automatically to selected filters
    * @returns {API}
    */
 
@@ -192,7 +251,7 @@ export class API {
 
       if (f.name) {
 
-        let availableFilters: Search.AvailableFilter[] = this.ngSearchBoxComponent.ngSearchBoxFiltering,
+        let availableFilters: Search.AvailableFilter[] = this.ngSearchBoxComponent.ngSearchboxFilteringComponent.getAvailableFilters,
 
           foundFilter: Search.AvailableFilter = _.find(availableFilters, { 'name': f.name });
 

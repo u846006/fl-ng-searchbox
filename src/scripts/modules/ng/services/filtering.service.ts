@@ -383,7 +383,7 @@ export class FilteringService {
 
   }
 
-  public removeAll(): void {
+  public removeAll (): void {
 
     let self: FilteringService = <FilteringService>this;
 
@@ -400,9 +400,7 @@ export class FilteringService {
 
   }
 
-  public buildExtendedParameter (
-    filter: ModifiedSearch.ModifiedFilter
-  ): ModifiedSearch.ModifiedFilter {
+  public buildExtendedParameter (filter: ModifiedSearch.ModifiedFilter): ModifiedSearch.ModifiedFilter {
 
     if (
       filter &&
@@ -493,6 +491,30 @@ export class FilteringService {
     }
 
     this.params = params;
+
+  }
+
+  public removeByFilterType (item: string|Search.AvailableFilter): void {
+
+    this
+      .addedFilters
+      .slice()
+      .reverse()
+      .forEach((
+        addedFilter: AddedFilter
+      ): void => {
+
+        if (
+          addedFilter.filter &&
+          (typeof item === 'string' && addedFilter.filter.name === item) ||
+          (typeof item === 'object' && item.name === addedFilter.filter.name)
+        ) {
+
+          this.remove(addedFilter);
+
+        }
+
+      });
 
   }
 

@@ -2,9 +2,6 @@
 
 import * as _ from 'lodash';
 
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-
 import {
   Component,
   Input,
@@ -15,13 +12,12 @@ import {
   ViewChild,
   ChangeDetectorRef,
   ElementRef,
-  Inject,
   ViewContainerRef,
   Compiler,
   Injector,
   NgModuleRef,
-  NgModule,
-  ComponentFactoryResolver, ComponentFactory
+  ComponentFactoryResolver,
+  ComponentFactory
 } from '@angular/core';
 
 import { UtilsService } from '../services/utils.service';
@@ -34,6 +30,7 @@ import { Search, ModifiedSearch } from '../../../interfaces/search';
 
 import { NgSearchboxAddedFiltersWrapper } from './ng-searchbox-added-filters-wrapper.component';
 import {ANGULAR_FACTORIES} from "../../../constants/angular.constant";
+import {NgSearchboxFilteringComponent} from "./ng-searchbox-filtering.component";
 
 @Component({
 
@@ -47,13 +44,17 @@ import {ANGULAR_FACTORIES} from "../../../constants/angular.constant";
 
 export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
+  public static NG_SEARCHBOX_FILTERING: string = 'ngSearchBoxFiltering';
+
   @ViewChild('ngSearchboxDclBottom', { read: ViewContainerRef }) public ngSearchboxDclBottom: ViewContainerRef;
 
   @ViewChild('ngSearchboxAddedFiltersWrapper') public ngSearchboxAddedFiltersWrapper: NgSearchboxAddedFiltersWrapper;
 
+  @ViewChild('ngSearchboxFilteringComponent') public ngSearchboxFilteringComponent: NgSearchboxFilteringComponent;
+
   @Input('searchParams') searchParams: Search.Parameters = null;
 
-  @Input('ngSearchBoxFiltering') public ngSearchBoxFiltering: Search.AvailableFilter[] = null;
+  @Input(NgSearchboxComponent.NG_SEARCHBOX_FILTERING) public ngSearchBoxFiltering: Search.AvailableFilter[] = null;
 
   @Input('ngSearchBoxConfig') public ngSearchBoxConfig: any = null;
 
@@ -109,7 +110,6 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
     public element: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private compiler: Compiler,
     private injector: Injector,
     private module: NgModuleRef<any>,
     public utils: UtilsService

@@ -80,6 +80,8 @@ export namespace Search {
 
     hideWhenAdded?: boolean;
 
+    [key: string]: any;
+
   }
 
   export interface AvailableFilter {
