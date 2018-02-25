@@ -290,6 +290,15 @@ export class API {
 
   }
 
+  public getFilters (): Search.AvailableFilter[] {
+
+    return this
+      .ngSearchBoxComponent
+      .ngSearchboxFilteringComponent
+      .getAvailableFilters;
+
+  }
+
   private hasEventErrors (
     evt: string,
     fn: Function,
