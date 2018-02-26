@@ -28,3 +28,7 @@ export { ValidationService } from './src/scripts/modules/ng/services/validation.
 export { NgSearchboxEvent } from './src/scripts/constants/events.constant';
 export { NgSearchboxOperators } from './src/scripts/constants/operators.constant';
 export { NgSearchboxSelectors } from './src/scripts/constants/selectors.constant';
+
+// interfaces
+
+export { ModifiedSearch, Search, AddedFilter } from './src/scripts/interfaces/search';
