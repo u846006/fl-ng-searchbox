@@ -290,6 +290,25 @@ export class API {
 
   }
 
+  /**
+   * @method setQuery
+   * Automatically set query via API
+   * @param {string} query
+   * @param {boolean} fire
+   */
+
+  public setQuery (query: string, fire: boolean = true): void {
+
+    this
+      .ngSearchBoxComponent
+      .query = query;
+
+    this
+      .ngSearchBoxComponent
+      .queryChange(query, fire)
+
+  }
+
   public getFilters (): Search.AvailableFilter[] {
 
     return this

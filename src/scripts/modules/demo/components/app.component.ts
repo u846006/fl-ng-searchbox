@@ -119,7 +119,9 @@ export class AppComponent {
 
     setTimeout(() => {
 
-      api.removeFilterFromMenu('bm_legacy_sku');
+      // api.removeFilterFromMenu('bm_legacy_sku');
+
+      api.setQuery('testing', false);
 
       console.log('removed.');
 

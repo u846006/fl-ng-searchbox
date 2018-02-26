@@ -268,7 +268,7 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
   }
 
-  public queryChange (val: string): void {
+  public queryChange (val: string, fire: boolean = true): void {
 
     let self: NgSearchboxComponent = <NgSearchboxComponent>this;
 
@@ -289,11 +289,15 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
       self.searchParams.query = val;
 
-      self
-        .Event
-        .onChange(self.searchParams)
-        .onQueryAdded(val, this.previousQuery)
-        .onQueryRemoved(val, this.previousQuery);
+      if (fire) {
+
+        self
+          .Event
+          .onChange(self.searchParams)
+          .onQueryAdded(val, this.previousQuery)
+          .onQueryRemoved(val, this.previousQuery);
+
+      }
 
     }
 
