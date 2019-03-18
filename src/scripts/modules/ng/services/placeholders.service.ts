@@ -21,6 +21,8 @@ export class PlaceholdersService {
 
   constructor (private searchbox: NgSearchboxComponent) {
 
+    this.setup();
+
     return this;
 
   }
