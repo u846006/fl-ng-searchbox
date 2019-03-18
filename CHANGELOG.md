@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.20"></a>
+## [0.3.20](https://github.com/tybeck/ng-searchbox/compare/v0.3.18...v0.3.20) (2019-03-18)
+
+
+
 <a name="0.3.18"></a>
 ## [0.3.18](https://github.com/tybeck/ng-searchbox/compare/v0.3.17...v0.3.18) (2018-03-13)
 
