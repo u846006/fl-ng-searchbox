@@ -88,7 +88,10 @@ export class PlaceholdersService {
 
   public change (reverse?: boolean) {
 
-    if (this.stopped) {
+    const elem: HTMLElement = (this.searchbox.element.nativeElement) as HTMLElement;
+    const visible = elem.offsetWidth > 0 && elem.offsetHeight > 0;
+
+    if (this.stopped || !visible) {
       return;
     }
 
