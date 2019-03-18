@@ -88,7 +88,7 @@ export class PlaceholdersService {
 
   public change (reverse?: boolean) {
 
-    if (!this.stopped) {
+    if (this.stopped) {
       return;
     }
 
