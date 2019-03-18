@@ -11,15 +11,15 @@ export class PlaceholdersService {
 
   private position: number = 0;
 
+  private stopped: boolean = true;
+
   private val: string = '';
 
   private timer: any = null;
 
   private config: Search.Configuration = null;
 
-  constructor (
-    private searchbox: NgSearchboxComponent
-  ) {
+  constructor (private searchbox: NgSearchboxComponent) {
 
     return this;
 
@@ -44,11 +44,15 @@ export class PlaceholdersService {
 
   public stop (): void {
 
+    this.stopped = true;
+
     return clearTimeout(this.timer);
 
   }
 
   public start (index: number): void {
+
+    this.stopped = false;
 
     if(typeof index !== 'undefined') {
 
@@ -81,6 +85,10 @@ export class PlaceholdersService {
   }
 
   public change (reverse?: boolean) {
+
+    if (!this.stopped) {
+      return;
+    }
 
     let self: PlaceholdersService = <PlaceholdersService>this;
 
