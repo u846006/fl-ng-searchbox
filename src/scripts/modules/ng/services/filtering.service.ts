@@ -383,7 +383,7 @@ export class FilteringService {
 
   }
 
-  public removeAll (): void {
+  public removeAll (options: Search.RemoveOptions = null): void {
 
     let self: FilteringService = <FilteringService>this;
 
@@ -393,8 +393,7 @@ export class FilteringService {
       .reverse()
       .forEach((filter: AddedFilter): void => {
 
-        return self
-          .remove(filter);
+        return self.remove(filter, options);
 
       });
 

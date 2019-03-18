@@ -11,12 +11,12 @@ const globby = require('globby');
 const async = require('async');
 const path = require('path');
 const fs = require('fs');
-const utils = require('util');
+const promisify = require('promisify-node');
 const sass = require('node-sass');
 
-const readFile = utils.promisify(fs.readFile);
-const unlinkFile = utils.promisify(fs.unlink);
-const writeFile = utils.promisify(fs.writeFile);
+const readFile = promisify(fs.readFile);
+const unlinkFile = promisify(fs.unlink);
+const writeFile = promisify(fs.writeFile);
 
 const templateNeedleBegin = `styleUrls': [`;
 const templateNeedleEnd = `]`;

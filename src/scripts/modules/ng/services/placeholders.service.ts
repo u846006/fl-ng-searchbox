@@ -1,9 +1,7 @@
 'use strict';
 
 import { Injectable } from '@angular/core';
-
 import { Search } from '../../../interfaces/search';
-
 import { NgSearchboxComponent } from '../components/ng-searchbox.component';
 
 @Injectable()
@@ -23,8 +21,6 @@ export class PlaceholdersService {
     private searchbox: NgSearchboxComponent
   ) {
 
-    this.setup();
-
     return this;
 
   }
@@ -43,6 +39,12 @@ export class PlaceholdersService {
     }
 
     return this;
+
+  }
+
+  public stop (): void {
+
+    return clearTimeout(this.timer);
 
   }
 
@@ -88,9 +90,7 @@ export class PlaceholdersService {
 
         self.val = self.val.slice(0, self.val.length - 1);
 
-        self
-          .searchbox
-          .placeholder = self.val;
+        self.searchbox.placeholder = self.val;
 
         if(self.val.length) {
 
@@ -124,9 +124,7 @@ export class PlaceholdersService {
 
         self.val += val[self.position];
 
-        self
-          .searchbox
-          .placeholder = self.val;
+        self.searchbox.placeholder = self.val;
 
         self.position ++;
 

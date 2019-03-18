@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 import { Injectable } from '@angular/core';
 
-import {ModifiedSearch, Search} from '../../../interfaces/search';
+import { ModifiedSearch, Search } from '../../../interfaces/search';
 
 import { NgSearchboxEvent } from '../../../constants/events.constant';
 
@@ -315,6 +315,21 @@ export class API {
       .ngSearchBoxComponent
       .ngSearchboxFilteringComponent
       .getAvailableFilters;
+
+  }
+
+  /**
+   * @method removeAllFilters
+   * Remove all filters from searchbox
+   * @param {boolean} update
+   */
+
+  public removeAllFilters (update: boolean = true): void {
+
+    return this
+      .ngSearchBoxComponent
+      .Filtering
+      .removeAll({ update });
 
   }
 

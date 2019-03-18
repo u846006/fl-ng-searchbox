@@ -121,9 +121,7 @@ export class AppComponent {
 
       // api.removeFilterFromMenu('bm_legacy_sku');
 
-      api.setQuery('testing', false);
-
-      console.log('removed.');
+      api.removeAllFilters();
 
     }, 10000);
 

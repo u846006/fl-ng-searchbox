@@ -13,7 +13,7 @@ export default {
 
   'output': {
 
-    'file': 'core/bundles/searchbox.umd.js',
+    'file': 'core/bundles/common-product-web.umd.js',
 
     'format': 'umd'
 

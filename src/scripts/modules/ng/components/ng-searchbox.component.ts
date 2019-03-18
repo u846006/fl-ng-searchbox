@@ -13,11 +13,11 @@ import {
   ChangeDetectorRef,
   ElementRef,
   ViewContainerRef,
-  Compiler,
   Injector,
   NgModuleRef,
   ComponentFactoryResolver,
-  ComponentFactory
+  ComponentFactory,
+  OnDestroy
 } from '@angular/core';
 
 import { UtilsService } from '../services/utils.service';
@@ -42,7 +42,7 @@ import {NgSearchboxFilteringComponent} from "./ng-searchbox-filtering.component"
 
 })
 
-export class NgSearchboxComponent implements OnInit, AfterViewInit {
+export class NgSearchboxComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public static NG_SEARCHBOX_FILTERING: string = 'ngSearchBoxFiltering';
 
@@ -147,6 +147,12 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
 
     this.Placeholding = new PlaceholdersService(self);
 
+    if (this.Placeholding) {
+
+      this.Placeholding.setup();
+
+    }
+
     self
       .Filtering
       .getPublisher()
@@ -177,6 +183,12 @@ export class NgSearchboxComponent implements OnInit, AfterViewInit {
     self
       .changeDetectorRef
       .detectChanges();
+
+  }
+
+  public ngOnDestroy (): void {
+
+    this.Placeholding.stop();
 
   }
 
