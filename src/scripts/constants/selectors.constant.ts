@@ -4,9 +4,13 @@ import { Search } from '../interfaces/search';
 
 export const NgSearchboxSelectors: Search.Selector[] = [
   {
+    'name': 'Starts with',
+    'key': 'startsWith',
+    'selected': true
+  },
+  {
     'name': 'Contains',
     'key': 'contains',
-    'selected': true,
     'notAllowed': [
       'restrictedSuggestedValues'
     ]
@@ -25,10 +29,6 @@ export const NgSearchboxSelectors: Search.Selector[] = [
   {
     'name': 'Is Not Equal To',
     'key': 'isNotEqualTo'
-  },
-  {
-    'name': 'Starts with',
-    'key': 'startsWith'
   },
   {
     'name': 'Ends with',

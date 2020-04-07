@@ -2,9 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NgSearchboxSelectors = [
     {
+        'name': 'Starts with',
+        'key': 'startsWith',
+        'selected': true
+    },
+    {
         'name': 'Contains',
         'key': 'contains',
-        'selected': true,
         'notAllowed': [
             'restrictedSuggestedValues'
         ]
@@ -23,10 +27,6 @@ exports.NgSearchboxSelectors = [
     {
         'name': 'Is Not Equal To',
         'key': 'isNotEqualTo'
-    },
-    {
-        'name': 'Starts with',
-        'key': 'startsWith'
     },
     {
         'name': 'Ends with',
