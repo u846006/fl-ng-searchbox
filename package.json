@@ -1,6 +1,6 @@
 {
   "name": "fl-ng-searchbox",
-  "version": "0.3.24",
+  "version": "0.3.25",
   "description": "Advanced Searchbox",
   "main": "core/bundles/searchbox.umd.js",
   "module": "index.js",
@@ -85,7 +85,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tybeck/ng-searchbox.git"
+    "url": "https://github.com/cp-footlocker/fl-ng-searchbox.git"
   },
-  "homepage": "https://github.com/tybeck/ng-searchbox"
+  "homepage": "https://github.com/cp-footlocker/fl-ng-searchbox"
 }

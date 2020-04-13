@@ -18,4 +18,4 @@
 - Filter Selectors - Selectors for filters *(Contains, Is Equal To, etc)*.
 - Operators - OR/AND support between filters to give more advanced searchbox functionality.
 
-##### Looking for angular 1.x version? You can find that here: https://github.com/tybeck/pure-angular-advanced-searchbox
+##### Looking for angular 1.x version? You can find that here: https://github.com/cp-footlocker/fl-ng-searchbox
