@@ -3,6 +3,7 @@
 /tmp
 /out-tsc
 /dist/out-tsc
+core
 
 # dependencies
 /node_modules
